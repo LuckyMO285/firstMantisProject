@@ -22,6 +22,7 @@ public class SimpleTest extends BaseTest{
         password.sendKeys("root" + Keys.ENTER);
 
         WebElement leftReportIssue = driver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[3]/a/i"));
+        // leftReportIssue.click();
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", leftReportIssue);
 
@@ -33,6 +34,10 @@ public class SimpleTest extends BaseTest{
         WebElement submitIssue = driver.findElement(By.xpath("//*[@id=\"report_bug_form\"]/div/div[2]/div[2]/input"));
         executor.executeScript("arguments[0].click();", submitIssue);
 
+        // TODO
+        // Your test does'n check anything
+        // 1. Create issue with unique(!) name
+        // 2. Check that newly created issue contains in All Issues table
     }
 
 }

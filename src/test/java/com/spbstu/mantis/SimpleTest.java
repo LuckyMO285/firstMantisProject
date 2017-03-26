@@ -55,6 +55,7 @@ public class SimpleTest extends BaseTest{
         //check that element was deleted
         try{
             WebElement checkSummary2 = driver.findElement(By.xpath("//*[@id=\"buglist\"]/tbody/tr/td[11]"));
+            Assert.assertFalse(checkSummary2.getText().equals("SoHelpMeGod"));
         }catch (NoSuchElementException ignored) {
             Assert.assertTrue(true);
         }

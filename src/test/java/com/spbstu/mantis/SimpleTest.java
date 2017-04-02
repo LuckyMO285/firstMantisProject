@@ -37,11 +37,19 @@ public class SimpleTest extends BaseTest{
         WebElement viewIssues = driver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[2]/a/i"));
         viewIssues.click();
 
-        WebElement checkSummary = driver.findElement(By.xpath("//*[@id=\"buglist\"]/tbody/tr/td[11]"));
-        Assert.assertTrue(checkSummary.getText().equals("SoHelpMeGod"));
+        List<WebElement> checkSummary = driver.findElements(By.xpath("//*[@id=\"buglist\"]/tbody/tr/td[11]"));
+        int i = 0;
+        boolean exitFromCycle = true;
+        while (exitFromCycle && i < checkSummary.size()){
+            if (checkSummary.get(i).getText().equals("SoHelpMeGod")){
+                Assert.assertTrue(true);
+                exitFromCycle = false;
+            }
+            i++;
+        }
 
         //click on ID
-        WebElement pressID = driver.findElement(By.xpath("//*[@id=\"buglist\"]/tbody/tr[1]/td[4]/a"));
+        WebElement pressID = driver.findElement(By.xpath("//*[@id=\"buglist\"]/tbody/tr["+i+"]/td[4]/a"));
         pressID.click();
 
         //click "Delete"
@@ -54,8 +62,16 @@ public class SimpleTest extends BaseTest{
 
         //check that element was deleted
         try{
-            WebElement checkSummary2 = driver.findElement(By.xpath("//*[@id=\"buglist\"]/tbody/tr/td[11]"));
-            Assert.assertFalse(checkSummary2.getText().equals("SoHelpMeGod"));
+            List<WebElement> checkSummary2 = driver.findElements(By.xpath("//*[@id=\"buglist\"]/tbody/tr/td[11]"));
+            i = 0;
+            exitFromCycle = true;
+            while (exitFromCycle && i < checkSummary2.size()){
+                if (checkSummary2.get(i).getText().equals("SoHelpMeGod")){
+                    Assert.assertTrue(false);
+                    exitFromCycle = false;
+                }
+                i++;
+            }
         }catch (NoSuchElementException ignored) {
             Assert.assertTrue(true);
         }
